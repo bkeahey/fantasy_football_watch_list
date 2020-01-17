@@ -30,4 +30,4 @@ class Database:
 #db = Database("rankings.db")
 
 #test player insert
-#db.insert("Diontae Johnson", "WR", "30", "7")
+#db.insert("Diontae Johnson", "WR", "30", "Round 7")
