@@ -12,9 +12,21 @@ class Application(tk.Frame):
         self.master = master
         master.title('Fantasy Players to Watch 2020')
         # Width x height
-        master.geometry("440x485")
+        master.geometry("500x550")
         # Background color
         master.configure(bg="#4C5B70")
+        # Frame/Grid size scales with app size
+        master.rowconfigure(0, weight=1)
+        master.rowconfigure(1, weight=1)
+        master.rowconfigure(2, weight=1)
+        master.rowconfigure(3, weight=1)
+        master.rowconfigure(4, weight=1)
+        master.rowconfigure(5, weight=1)
+
+        master.columnconfigure(0, weight=1)
+        master.columnconfigure(1, weight=1)
+        master.columnconfigure(2, weight=1)
+        master.columnconfigure(3, weight=1)
         # Create widgets/grid
         self.create_widgets()
         self.selected_player = 0
@@ -25,41 +37,41 @@ class Application(tk.Frame):
         # Player Name
         self.player_text = tk.StringVar()
         self.player_label = tk.Label(
-            self.master, text='Player Name', font=('bold', 14), bg=("#4C5B70"), fg=("#FFFFFF"), pady=10)
-        self.player_label.grid(row=0, column=0, columnspan=2, sticky=tk.W)
+            self.master, text='Player Name', font=('bold', 18), bg=("#4C5B70"), fg=("#FFFFFF"), pady=10)
+        self.player_label.grid(row=0, column=0, columnspan=2, sticky="nsew")
         self.player_entry = tk.Entry(self.master, textvariable=self.player_text)
         self.player_entry.grid(row=0, column=2, columnspan=2)
         # Position
         self.position_text = tk.StringVar()
         self.position_label = tk.Label(
-            self.master, text='Position', font=('bold', 14), bg=("#4C5B70"), fg=("#FFFFFF"), pady=10)
-        self.position_label.grid(row=1, column=0, columnspan=2, sticky=tk.W)
+            self.master, text='Position', font=('bold', 18), bg=("#4C5B70"), fg=("#FFFFFF"), pady=10)
+        self.position_label.grid(row=1, column=0, columnspan=2, sticky="nsew")
         self.position_entry = tk.Entry(
             self.master, textvariable=self.position_text)
         self.position_entry.grid(row=1, column=2, columnspan=2)
         # Position Rank
         self.rank_text = tk.StringVar()
         self.rank_label = tk.Label(
-            self.master, text='2019 Position Rank', font=('bold', 14), bg=("#4C5B70"), fg=("#FFFFFF"), pady=10)
-        self.rank_label.grid(row=2, column=0, columnspan=2, sticky=tk.W)
+            self.master, text='2019 Position Rank', font=('bold', 18), bg=("#4C5B70"), fg=("#FFFFFF"), pady=10)
+        self.rank_label.grid(row=2, column=0, columnspan=2, sticky="nsew")
         self.rank_entry = tk.Entry(
             self.master, textvariable=self.rank_text)
         self.rank_entry.grid(row=2, column=2, columnspan=2)
         # 2020 Estimated Value
         self.value_text = tk.StringVar()
         self.value_label = tk.Label(
-            self.master, text='2020 Estimated Value', font=('bold', 14), bg=("#4C5B70"), fg=("#FFFFFF"), pady=10)
-        self.value_label.grid(row=3, column=0, columnspan=2, sticky=tk.W)
+            self.master, text='2020 Estimated Value', font=('bold', 18), bg=("#4C5B70"), fg=("#FFFFFF"), pady=10)
+        self.value_label.grid(row=3, column=0, columnspan=2, sticky="nsew")
         self.value_entry = tk.Entry(self.master, textvariable=self.value_text)
         self.value_entry.grid(row=3, column=2, columnspan=2)
 
         # Players list using a listbox
         self.players_list = tk.Listbox(self.master, height=13, width=70, border=0)
         self.players_list.grid(row=5, column=0, columnspan=4,
-                             rowspan=10, pady=5)
+                             rowspan=10, pady=5, sticky="nsew")
         # Create scrollbar
         self.scrollbar = tk.Scrollbar(self.master)
-        self.scrollbar.grid(row=5, column=4, rowspan=10, sticky=tk.NS, pady=5)
+        self.scrollbar.grid(row=5, column=4, rowspan=10, sticky="nsew", pady=5)
         # Set the scrollbar to players
         self.players_list.configure(yscrollcommand=self.scrollbar.set)
         self.scrollbar.configure(command=self.players_list.yview)
@@ -70,19 +82,33 @@ class Application(tk.Frame):
         # Buttons
         self.add_btn = tk.Button(
             self.master, text="Add Player", width=12, command=self.add_player)
-        self.add_btn.grid(row=4, column=0, sticky=tk.W, pady=20)
+        self.add_btn.grid(row=4, column=0, sticky="nsew")
 
         self.remove_btn = tk.Button(
             self.master, text="Remove Player", width=12, command=self.remove_player)
-        self.remove_btn.grid(row=4, column=1, sticky=tk.W)
+        self.remove_btn.grid(row=4, column=1, sticky="nsew")
 
         self.update_btn = tk.Button(
             self.master, text="Update Player", width=12, command=self.update_player)
-        self.update_btn.grid(row=4, column=2)
+        self.update_btn.grid(row=4, column=2, sticky="nsew")
 
         self.exit_btn = tk.Button(
             self.master, text="Clear", width=12, command=self.clear_text)
-        self.exit_btn.grid(row=4, column=3)
+        self.exit_btn.grid(row=4, column=3, sticky="nsew")
+
+
+        self.grid_configure(sticky="nsew")
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_columnconfigure(1, weight=1)
+        self.grid_columnconfigure(2, weight=1)
+        self.grid_columnconfigure(3, weight=1)
+
+        self.grid_rowconfigure(0, weight=1)
+        self.grid_rowconfigure(1, weight=1)
+        self.grid_rowconfigure(2, weight=1)
+        self.grid_rowconfigure(3, weight=1)
+        self.grid_rowconfigure(4, weight=1)
+        self.grid_rowconfigure(5, weight=1)
 
     def populate_list(self):
         # Deletes players before update
